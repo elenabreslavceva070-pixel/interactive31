@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Аванс & Выручка | Стильный тренажёр</title>
+    <title>Аванс & Выручка · компакт</title>
     <style>
         * {
             margin: 0;
@@ -18,21 +18,21 @@
             align-items: center;
             justify-content: center;
             font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .quiz-container {
-            max-width: 820px;
+            max-width: 720px;
             width: 100%;
             background: #ffffff;
-            border-radius: 2.5rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.03);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.03);
             overflow: hidden;
             transition: all 0.2s ease;
         }
 
         .quiz-header {
-            padding: 1.8rem 2rem 1rem 2rem;
+            padding: 1.2rem 1.5rem 0.6rem 1.5rem;
             border-bottom: 1px solid rgba(149, 202, 250, 0.4);
             background: #fefefe;
         }
@@ -42,71 +42,71 @@
             justify-content: space-between;
             align-items: baseline;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
         }
 
         .question-counter {
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
             color: #2c3e50;
             background: #eef4fc;
-            padding: 0.3rem 0.9rem;
+            padding: 0.2rem 0.7rem;
             border-radius: 40px;
             display: inline-block;
         }
 
         .score-badge {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: #1e4663;
             background: #eef4fc;
-            padding: 0.3rem 0.9rem;
+            padding: 0.2rem 0.7rem;
             border-radius: 40px;
         }
 
         h2 {
-            font-size: 1.65rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #1a2c3e;
-            margin-top: 0.5rem;
+            margin-top: 0.2rem;
             letter-spacing: -0.2px;
         }
 
         .question-area {
-            padding: 2rem 2rem 1.5rem 2rem;
+            padding: 1.2rem 1.5rem 0.8rem 1.5rem;
         }
 
         .question-text {
-            font-size: 1.5rem;
+            font-size: 1.05rem;
             font-weight: 500;
-            line-height: 1.35;
+            line-height: 1.3;
             color: #0b2b3f;
-            margin-bottom: 2rem;
-            border-left: 5px solid #95CAFA;
-            padding-left: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #95CAFA;
+            padding-left: 1rem;
         }
 
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
         }
 
         .option-item {
             border: 2px solid #95CAFA;
-            border-radius: 1.25rem;
-            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            padding: 0.6rem 1rem;
             background: #ffffff;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             cursor: pointer;
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            font-size: 1rem;
-            line-height: 1.4;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            line-height: 1.3;
             color: #1f3b4c;
         }
 
@@ -114,14 +114,14 @@
             background: #f8fcff;
             border-color: #6fb0e0;
             transform: translateY(-1px);
-            box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px -8px rgba(0, 0, 0, 0.1);
         }
 
         .option-radio {
             appearance: none;
             -webkit-appearance: none;
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 1rem;
+            height: 1rem;
             border: 2px solid #95CAFA;
             border-radius: 50%;
             margin-top: 0.1rem;
@@ -129,6 +129,7 @@
             cursor: pointer;
             background: white;
             transition: 0.1s;
+            flex-shrink: 0;
         }
         .option-radio:checked {
             border-color: #2c7ab1;
@@ -154,19 +155,19 @@
         }
 
         .actions {
-            padding: 0 2rem 2rem 2rem;
+            padding: 0 1.5rem 1.2rem 1.5rem;
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
         }
 
         button {
             font-family: inherit;
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.8rem 1.8rem;
+            font-size: 0.8rem;
+            padding: 0.5rem 1.4rem;
             border-radius: 3rem;
             border: none;
             cursor: pointer;
@@ -194,64 +195,67 @@
         }
 
         .explanation-box {
-            margin: 0 2rem 1.5rem 2rem;
+            margin: 0 1.5rem 0.8rem 1.5rem;
             background: #f9fdfe;
-            border-radius: 1.2rem;
-            padding: 1.2rem 1.5rem;
-            border-left: 5px solid #95CAFA;
-            font-size: 0.95rem;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            border-left: 4px solid #95CAFA;
+            font-size: 0.8rem;
             color: #1e4663;
-            line-height: 1.45;
+            line-height: 1.4;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
         .result-screen {
             text-align: center;
-            padding: 2.5rem 2rem 3rem;
+            padding: 1.8rem 1.5rem 2rem;
         }
 
         .result-icon {
-            font-size: 3.2rem;
-            margin-bottom: 0.75rem;
+            font-size: 2.4rem;
+            margin-bottom: 0.3rem;
         }
 
         .result-title {
-            font-size: 1.9rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             color: #1a2c3e;
         }
 
         .result-message {
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
             color: #2c3e50;
         }
 
         .result-score {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             background: #eef4fc;
             display: inline-block;
-            padding: 0.5rem 1.5rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 60px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: #1f6190;
         }
 
         hr {
-            margin: 1rem 2rem;
+            margin: 0.6rem 1.5rem;
             border: none;
             border-top: 1px solid #e2edf5;
         }
 
-        @media (max-width: 550px) {
-            .quiz-container { border-radius: 1.8rem; }
-            .question-text { font-size: 1.25rem; }
-            .option-item { padding: 0.8rem 1rem; }
-            button { padding: 0.6rem 1.2rem; }
+        @media (max-width: 480px) {
+            .quiz-container { border-radius: 1.6rem; }
+            .question-text { font-size: 0.95rem; }
+            .option-item { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+            button { padding: 0.4rem 1rem; font-size: 0.75rem; }
             .actions { flex-direction: column; align-items: stretch; }
             .btn-primary, .btn-secondary { justify-content: center; display: flex; }
+            .quiz-header { padding: 0.8rem 1rem 0.4rem 1rem; }
+            .question-area { padding: 0.8rem 1rem 0.4rem 1rem; }
+            .explanation-box { margin: 0 1rem 0.6rem 1rem; font-size: 0.75rem; padding: 0.6rem 1rem; }
         }
     </style>
 </head>
@@ -260,7 +264,7 @@
 <div class="quiz-container" id="app"></div>
 
 <script>
-    // ----- ВОПРОСЫ -----
+    // ----- ВОПРОСЫ (3 шт) -----
     const QUESTIONS = [
         {
             text: "1. Ваша компания получила аванс в декабре, а продукцию отгрузила в январе следующего года. Как вы отразите аванс в отчетности?",
@@ -307,7 +311,6 @@
 
     const appContainer = document.getElementById('app');
 
-    // Записать ответ текущего вопроса в массив
     function recordCurrentAnswer() {
         const idx = currentState.currentQuestionIdx;
         const selected = currentState.selectedOptionTemp;
@@ -317,7 +320,6 @@
         return true;
     }
 
-    // Подсчёт правильных ответов
     function getCorrectCount() {
         let correct = 0;
         for (let i = 0; i < currentState.userAnswers.length; i++) {
@@ -326,31 +328,19 @@
         return correct;
     }
 
-    // Проверка, все ли вопросы отвечены
     function allQuestionsAnswered() {
         return currentState.userAnswers.length === QUESTIONS.length && 
                currentState.userAnswers.every(a => a !== undefined);
     }
 
-    // Показать финальный итог (всегда после третьего вопроса)
     function showFinalResult() {
         const correctCount = getCorrectCount();
         const total = QUESTIONS.length;
         const allCorrect = (correctCount === total);
         
-        let icon = '';
-        let title = '';
+        let icon = allCorrect ? '🏆✨' : '📊';
+        let title = allCorrect ? 'Молодец!' : 'Ваш результат';
         let message = '';
-        
-        if (allCorrect) {
-            icon = '🏆✨';
-            title = 'Молодец!';
-            message = '';
-        } else {
-            icon = '📊';
-            title = 'Ваш результат';
-            message = '';
-        }
         
         const resultHtml = `
             <div class="quiz-header">
@@ -365,70 +355,50 @@
                 <div class="result-title">${title}</div>
                 <div class="result-score">Вы набрали ${correctCount} из ${total} баллов</div>
                 <div class="result-message">${message}</div>
-                <button class="btn-primary" id="restartBtn" style="padding: 0.9rem 2.2rem; font-size:1rem;">Пройти заново</button>
+                <button class="btn-primary" id="restartBtn" style="padding: 0.6rem 1.8rem; font-size:0.85rem;">Пройти заново</button>
             </div>
         `;
         
         appContainer.innerHTML = resultHtml;
-        const restartBtn = document.getElementById('restartBtn');
-        if (restartBtn) restartBtn.addEventListener('click', () => resetAndRestart());
+        document.getElementById('restartBtn')?.addEventListener('click', resetAndRestart);
     }
     
-    // Обработка "Далее" (после пояснения) -> либо следующий вопрос, либо сразу итог
     function handleNext() {
         const nextIdx = currentState.currentQuestionIdx + 1;
-        
-        // Если это был последний вопрос (только что ответили на 3-й)
         if (nextIdx >= QUESTIONS.length) {
-            // Все вопросы завершены -> показываем итог БЕЗ дополнительных фраз (только баллы, и "Молодец" если всё правильно)
             showFinalResult();
             return;
         }
-        
-        // Иначе переходим к следующему вопросу
         currentState.currentQuestionIdx = nextIdx;
         currentState.phase = 'quiz';
         currentState.isAnswerChecked = false;
         currentState.explanationForCurrent = null;
-        
-        // Восстанавливаем выбранный вариант для этого вопроса, если ранее был сохранён
         const saved = currentState.userAnswers[nextIdx];
-        if (saved) {
-            currentState.selectedOptionTemp = saved.selectedIdx;
-        } else {
-            currentState.selectedOptionTemp = null;
-        }
+        currentState.selectedOptionTemp = saved ? saved.selectedIdx : null;
         render();
     }
 
-    // Обработка "Проверить"
     function handleCheck() {
         if (currentState.isAnswerChecked) return;
-        
         const selected = currentState.selectedOptionTemp;
         if (selected === null) {
             alert("Пожалуйста, выберите один из вариантов ответа.");
             return;
         }
-        
         const idx = currentState.currentQuestionIdx;
         const isCorrect = (selected === QUESTIONS[idx].correctIndex);
-        
-        // Сохраняем ответ
         if (!currentState.userAnswers[idx]) {
             currentState.userAnswers[idx] = { selectedIdx: selected, isCorrect: isCorrect };
         } else {
             currentState.userAnswers[idx].selectedIdx = selected;
             currentState.userAnswers[idx].isCorrect = isCorrect;
         }
-        
         currentState.isAnswerChecked = true;
         currentState.explanationForCurrent = QUESTIONS[idx].explanation;
         currentState.phase = 'explanation';
         render();
     }
 
-    // Полный сброс и перезапуск
     function resetAndRestart() {
         currentState = {
             phase: 'quiz',
@@ -442,7 +412,6 @@
         render();
     }
 
-    // Выбор варианта
     function selectOption(optionIndex) {
         if (currentState.phase !== 'quiz') return;
         if (currentState.isAnswerChecked) return;
@@ -450,11 +419,8 @@
         render();
     }
 
-    // Отрисовка (фазы quiz и explanation)
     function render() {
         if (!appContainer) return;
-        
-        // Если все вопросы уже отвечены (например, после перезагрузки состояния), но почему-то render вызван — проверим
         if (allQuestionsAnswered() && (currentState.phase === 'quiz' || currentState.phase === 'explanation') && currentState.currentQuestionIdx >= QUESTIONS.length) {
             showFinalResult();
             return;
@@ -464,11 +430,9 @@
         const qIdx = currentState.currentQuestionIdx;
         const question = QUESTIONS[qIdx];
         const isCheckedPhase = (currentState.phase === 'explanation');
-        
         let savedAnswer = currentState.userAnswers[qIdx];
         let selectedIdx = currentState.selectedOptionTemp;
         
-        // Подсветка для фазы explanation
         let highlightMap = {};
         if (isCheckedPhase && savedAnswer) {
             const correctIdx = question.correctIndex;
@@ -479,7 +443,6 @@
             }
         }
         
-        // Строим варианты
         let optionsHtml = '';
         question.options.forEach((opt, idx) => {
             let additionalClass = '';
@@ -495,7 +458,6 @@
             `;
         });
         
-        // Пояснение
         let explanationBlock = '';
         if (currentState.phase === 'explanation' && currentState.explanationForCurrent) {
             explanationBlock = `
@@ -506,7 +468,6 @@
             `;
         }
         
-        // Кнопки
         let actionButtons = '';
         if (currentState.phase === 'quiz') {
             actionButtons = `
@@ -522,7 +483,6 @@
             `;
         }
         
-        // Прогресс: сколько отвечено
         const answeredCount = currentState.userAnswers.filter(a => a !== undefined).length;
         
         const headerHtml = `
@@ -545,9 +505,8 @@
         
         appContainer.innerHTML = headerHtml;
         
-        // Обработчики кликов по вариантам
-        const optionDivs = document.querySelectorAll('.option-item');
-        optionDivs.forEach(div => {
+        // клики по option-item
+        document.querySelectorAll('.option-item').forEach(div => {
             const radio = div.querySelector('.option-radio');
             if (radio && !radio.disabled) {
                 div.addEventListener('click', (e) => {
@@ -562,9 +521,8 @@
             }
         });
         
-        // Обработчики на радио
-        const radios = document.querySelectorAll('.option-radio');
-        radios.forEach(radio => {
+        // радио
+        document.querySelectorAll('.option-radio').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 if (currentState.phase === 'quiz' && !currentState.isAnswerChecked) {
                     const val = parseInt(e.target.value, 10);
@@ -573,11 +531,8 @@
             });
         });
         
-        // Кнопки
-        const checkBtn = document.getElementById('checkBtn');
-        if (checkBtn) checkBtn.addEventListener('click', handleCheck);
-        const nextBtn = document.getElementById('nextBtn');
-        if (nextBtn) nextBtn.addEventListener('click', handleNext);
+        document.getElementById('checkBtn')?.addEventListener('click', handleCheck);
+        document.getElementById('nextBtn')?.addEventListener('click', handleNext);
     }
     
     function escapeHtml(str) {
@@ -589,7 +544,6 @@
         });
     }
     
-    // Старт
     render();
 </script>
 </body>
