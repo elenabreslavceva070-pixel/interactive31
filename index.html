@@ -294,9 +294,7 @@
                 "Риск занизить расходы"
             ],
             correctIndex: 0,
-            explanation: "Если по долгосрочному договору вы признаете выручку только в конце работ, возникает риск исказить бухгалтерскую отчетность. В первые периоды вы занизите показатели, хотя работы уже выполняете и деньги за них поступают. В последнем периоде произойдет резкий рост выручки и прибыли.
-
-При этом наличие промежуточных актов само по себе не означает, что именно на их основании вы признаете выручку. Главное — определить момент передачи контроля. Именно этот момент определяет, когда выручку вы отразите в учете."
+            explanation: "Если по долгосрочному договору вы признаете выручку только в конце работ, возникает риск исказить бухгалтерскую отчетность. В первые периоды вы занизите показатели, хотя работы уже выполняете и деньги за них поступают. В последнем периоде произойдет резкий рост выручки и прибыли. При этом наличие промежуточных актов само по себе не означает, что именно на их основании вы признаете выручку. Главное — определить момент передачи контроля. Именно этот момент определяет, когда выручку вы отразите в учете."
         }
     ];
 
@@ -304,7 +302,7 @@
     let currentState = {
         phase: 'quiz',          // 'quiz', 'explanation'
         currentQuestionIdx: 0,
-        userAnswers: [],        // { selectedIdx, isCorrect }
+        userAnswers: new Array(QUESTIONS.length).fill(null), // массив фиксированной длины
         explanationForCurrent: null,
         isAnswerChecked: false,
         selectedOptionTemp: null,
@@ -331,8 +329,8 @@
     }
 
     function allQuestionsAnswered() {
-        return currentState.userAnswers.length === QUESTIONS.length && 
-               currentState.userAnswers.every(a => a !== undefined);
+        // Проверяем, что все вопросы отвечены (не null)
+        return currentState.userAnswers.every(a => a !== null);
     }
 
     function showFinalResult() {
@@ -342,7 +340,6 @@
         
         let icon = allCorrect ? '🏆✨' : '📊';
         let title = allCorrect ? 'Молодец!' : 'Ваш результат';
-        let message = '';
         
         const resultHtml = `
             <div class="quiz-header">
@@ -356,7 +353,7 @@
                 <div class="result-icon">${icon}</div>
                 <div class="result-title">${title}</div>
                 <div class="result-score">Вы набрали ${correctCount} из ${total} баллов</div>
-                <div class="result-message">${message}</div>
+                <div class="result-message">${allCorrect ? 'Отличный результат! Все ответы верны.' : 'Попробуйте пройти тест заново, чтобы улучшить результат.'}</div>
                 <button class="btn-primary" id="restartBtn" style="padding: 0.6rem 1.8rem; font-size:0.85rem;">Пройти заново</button>
             </div>
         `;
@@ -389,12 +386,7 @@
         }
         const idx = currentState.currentQuestionIdx;
         const isCorrect = (selected === QUESTIONS[idx].correctIndex);
-        if (!currentState.userAnswers[idx]) {
-            currentState.userAnswers[idx] = { selectedIdx: selected, isCorrect: isCorrect };
-        } else {
-            currentState.userAnswers[idx].selectedIdx = selected;
-            currentState.userAnswers[idx].isCorrect = isCorrect;
-        }
+        currentState.userAnswers[idx] = { selectedIdx: selected, isCorrect: isCorrect };
         currentState.isAnswerChecked = true;
         currentState.explanationForCurrent = QUESTIONS[idx].explanation;
         currentState.phase = 'explanation';
@@ -405,7 +397,7 @@
         currentState = {
             phase: 'quiz',
             currentQuestionIdx: 0,
-            userAnswers: [],
+            userAnswers: new Array(QUESTIONS.length).fill(null),
             explanationForCurrent: null,
             isAnswerChecked: false,
             selectedOptionTemp: null,
@@ -423,17 +415,32 @@
 
     function render() {
         if (!appContainer) return;
-        if (allQuestionsAnswered() && (currentState.phase === 'quiz' || currentState.phase === 'explanation') && currentState.currentQuestionIdx >= QUESTIONS.length) {
+        
+        // Проверяем, все ли вопросы отвечены и переходим к финальному экрану
+        if (allQuestionsAnswered() && currentState.phase === 'quiz' && currentState.currentQuestionIdx >= QUESTIONS.length) {
             showFinalResult();
             return;
         }
         
+        // Если все вопросы отвечены, но мы на финальном вопросе в режиме explanation, ничего не делаем
+        if (allQuestionsAnswered() && currentState.phase === 'explanation' && currentState.currentQuestionIdx === QUESTIONS.length - 1) {
+            // Показываем финальный экран только после нажатия "Далее" на последнем вопросе
+            // или если пользователь перезагрузил страницу
+        }
+        
         const total = QUESTIONS.length;
         const qIdx = currentState.currentQuestionIdx;
+        
+        // Защита от выхода за границы
+        if (qIdx >= total) {
+            showFinalResult();
+            return;
+        }
+        
         const question = QUESTIONS[qIdx];
         const isCheckedPhase = (currentState.phase === 'explanation');
-        let savedAnswer = currentState.userAnswers[qIdx];
-        let selectedIdx = currentState.selectedOptionTemp;
+        const savedAnswer = currentState.userAnswers[qIdx];
+        const selectedIdx = currentState.selectedOptionTemp;
         
         let highlightMap = {};
         if (isCheckedPhase && savedAnswer) {
@@ -478,14 +485,16 @@
                 </div>
             `;
         } else {
+            const isLast = (qIdx === total - 1);
+            const buttonText = isLast ? 'Завершить 🎯' : 'Далее →';
             actionButtons = `
                 <div class="actions">
-                    <button class="btn-primary" id="nextBtn">Далее →</button>
+                    <button class="btn-primary" id="nextBtn">${buttonText}</button>
                 </div>
             `;
         }
         
-        const answeredCount = currentState.userAnswers.filter(a => a !== undefined).length;
+        const answeredCount = currentState.userAnswers.filter(a => a !== null).length;
         
         const headerHtml = `
             <div class="quiz-header">
@@ -493,7 +502,7 @@
                     <span class="question-counter">Вопрос ${qIdx+1} из ${total}</span>
                     <span class="score-badge">✅ ${answeredCount}/${total} отвечено</span>
                 </div>
-                <h2>Выберите правильный ответ</h2>
+                <h2>${isCheckedPhase ? 'Результат' : 'Выберите правильный ответ'}</h2>
             </div>
             <div class="question-area">
                 <div class="question-text">${escapeHtml(question.text)}</div>
@@ -546,6 +555,7 @@
         });
     }
     
+    // Инициализация
     render();
 </script>
 </body>
